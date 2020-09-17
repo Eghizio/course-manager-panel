@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { ElementType, useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -6,12 +6,11 @@ import { AuthContext } from "../providers/AuthProvider";
 export interface PrivateRouteProps{
     path: string
     exact: boolean
-    comp: any
+    component: ElementType
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = (props) => {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: RouteComponent, ...props }) => {
     const { currentUser } = useContext(AuthContext);
-    const { comp: RouteComponent } = props;
 
     return (
         <Route
@@ -19,7 +18,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = (props) => {
             render={routeProps =>
                 !!currentUser
                 ?   <RouteComponent {...routeProps}/>
-                :   <Redirect to="/login"/>
+                :   <Redirect to="/"/>
             }
         />
     );

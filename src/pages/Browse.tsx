@@ -1,21 +1,20 @@
 import React from "react";
-import styled from "styled-components";
 import Header from "../components/organisms/Header";
 import Main from "../components/atoms/Main";
 
-export interface HomeProps{
+export interface BrowseProps{
 
 }
 
-const Home: React.FC<HomeProps> = (props) => {
+const Browse: React.FC<BrowseProps> = (props) => {
     return (
         <div>
-            <Header>Home</Header>
+            <Header>Browse</Header>
             <Main>
-                <h2>Main</h2>
+                Browse
             </Main>
         </div>
     );
 };
 
-export default Home;
+export default Browse;

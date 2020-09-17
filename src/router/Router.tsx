@@ -8,9 +8,10 @@ const Router: React.FC = (props) => {
     return (
         <BrowserRouter>
             <Switch>
-                <PrivateRoute exact path="/" comp={Page.Home}/>
-                <Route exact path="/signup" component={Page.SignUp}/>
-                <Route exact path="/login" component={Page.LogIn}/>
+                <Route exact path="/" component={Page.Home}/>
+                <Route exact path="/browse" component={Page.Browse}/>
+                <Route exact path="/login" component={Page.Login}/>
+                <PrivateRoute exact path="/panel" component={Page.Panel}/>
                 <Route component={Page.NotFound}/>
             </Switch>
         </BrowserRouter>

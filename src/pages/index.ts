@@ -1,4 +1,5 @@
 export {default as NotFound} from "./NotFound";
-export {default as SignUp} from "./SignUp";
-export {default as LogIn} from "./LogIn";
 export {default as Home} from "./Home";
+export {default as Browse} from "./Browse";
+export {default as Login} from "./Login";
+export {default as Panel} from "./Panel";

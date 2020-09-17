@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Main from "../components/atoms/Main";
 import Center from "../components/atoms/Center";
 
 export interface NotFoundProps{
@@ -8,9 +9,11 @@ export interface NotFoundProps{
 
 const NotFound: React.FC<NotFoundProps> = (props) => {
     return (
-        <Center>
-            <h1>404</h1>
-        </Center>
+        <Main>
+            <Center>
+                <h1>404</h1>
+            </Center>
+        </Main>
     );
 };
 

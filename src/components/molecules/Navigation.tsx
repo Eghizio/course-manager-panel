@@ -1,23 +1,31 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router";
+import { auth } from "../../firebase";
 
 export type NavigationItem = { name: string, path: string };
-export interface NavigationProps{
+export interface NavigationProps extends RouteComponentProps{
     navItems: NavigationItem[]
+    isLoggedIn: boolean
+    history: any
 }
 
-const Navigation: React.FC<NavigationProps> = ({ navItems }) => {
+const Navigation: React.FC<NavigationProps> = ({ navItems, isLoggedIn, history }) => {
     return (
         <StyledNavigation>
             <NavigationList>
                 {navItems.map(({ name, path }) => 
-                    <StyledLink to={path}>
+                    <StyledLink key={path} to={path}>
                         <NavigationListItem>
                             {name}
                         </NavigationListItem>
                     </StyledLink>
                 )}
+                {isLoggedIn
+                ?   <SignOutButton onClick={() => auth.signOut()}>Sign out</SignOutButton>
+                :   <SignInButton onClick={() => history.push("/login")}>Sign in</SignInButton>
+                }
             </NavigationList>
         </StyledNavigation>
     );
@@ -56,4 +64,33 @@ const NavigationListItem = styled.li`
     }
 `;
 
-export default Navigation;
+const Button = styled.button`
+    border: none;
+    align-self: center;
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+    translate: transform 400ms ease-in;
+    &:hover{
+        transform: scale(1.05);
+        box-shadow: 0px 0px 5px white;
+        text-shadow: 0px 0px 3px white;
+    }
+`;
+
+const SignInButton = styled(Button)`
+    &:hover{
+        color: green;
+        /* text-shadow: 0px 0px 1px green; */
+    }
+`;
+
+const SignOutButton = styled(Button)`
+    &:hover{
+        color: red;
+    }
+`;
+
+export default withRouter(Navigation);

@@ -33,8 +33,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                     </Breadcrumb>
                 </BreadcrumbsBar>
             </Heading>
-            <Navigation navItems={navigationItems}/>
-            {/* {currentUser && <button>Logout</button>} */}
+            <Navigation navItems={navigationItems} isLoggedIn={!!currentUser}/>
         </StyledHeader>
     );
 };
@@ -46,6 +45,7 @@ const StyledHeader = styled.header`
     background-color: dodgerblue;
     color: white;
     height: 80px;
+    box-shadow: 0px 0px 7px dodgerblue;
 `;
 
 const Heading = styled.div`

@@ -1,21 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { auth } from "../firebase";
 import Header from "../components/organisms/Header";
 import Main from "../components/atoms/Main";
 
-export interface HomeProps{
+export interface PanelProps{
 
 }
 
-const Home: React.FC<HomeProps> = (props) => {
+const Panel: React.FC<PanelProps> = (props) => {
     return (
         <div>
-            <Header>Home</Header>
+            <Header>Panel</Header>
             <Main>
-                <h2>Main</h2>
+                <h2>Panel</h2>
             </Main>
         </div>
     );
 };
 
-export default Home;
+export default Panel;
