@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/organisms/Header";
-import Main from "../components/atoms/Main";
+import Header from "../../components/organisms/Header";
+import Main from "../../components/atoms/Main";
 
 export interface BrowseProps{
 

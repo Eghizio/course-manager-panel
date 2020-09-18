@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import Main from "../components/atoms/Main";
-import Center from "../components/atoms/Center";
+// import styled from "styled-components";
+import Main from "../../components/atoms/Main";
+import Center from "../../components/atoms/Center";
 
 export interface NotFoundProps{
 
