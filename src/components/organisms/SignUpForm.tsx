@@ -1,14 +1,14 @@
 import React, { useCallback } from "react";
+// import styled from "styled-components";
 import { withRouter } from "react-router";
 import { auth } from "../../firebase";
 
 
-export interface SignUpProps{
+export interface SignUpFormProps{
     history: any
 }
 
-// change into an organism and use on one page with login
-const SignUp: React.FC<SignUpProps> = ({ history }) => {
+const SignUpForm: React.FC<SignUpFormProps> = ({ history }) => {
     const handleSignUp = useCallback(async (event) => {
         event.preventDefault();
         const { email, password } = event.target.elements;
@@ -37,4 +37,4 @@ const SignUp: React.FC<SignUpProps> = ({ history }) => {
     );
 };
 
-export default withRouter(SignUp);
+export default withRouter(SignUpForm);

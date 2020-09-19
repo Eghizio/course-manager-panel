@@ -4,23 +4,23 @@ import Header from "../../components/organisms/Header";
 import Main from "../../components/atoms/Main";
 import Center from "../../components/atoms/Center";
 import ToggleText from "../../components/molecules/ToggleText";
-import SignIn from "../../components/molecules/SignIn";
-import SignUp from "../../components/molecules/SignUp";
+import SignInForm from "../../components/organisms/SignInForm";
+import SignUpForm from "../../components/organisms/SignUpForm";
 
 
-export interface LoginProps{
+export interface WelcomeProps{
 
 }
 
 
 // Naming stuff is hard af xD
-const Login: React.FC<LoginProps> = (props) => {
+const Welcome: React.FC<WelcomeProps> = (props) => {
     const [isSignInActive, setIsSignInActive] = useState<boolean>(true);
     // make signin signout fadein
 
     return (
         <div>
-            <Header>Sign In</Header>
+            <Header>Welcome</Header>
             <Main>
                 <Center>
                     <ToggleText
@@ -30,8 +30,8 @@ const Login: React.FC<LoginProps> = (props) => {
                         setToggle={setIsSignInActive}
                     />
                     {isSignInActive
-                    ?   <FadeIn key="1" isActive={isSignInActive}><SignIn/></FadeIn>
-                    :   <FadeIn key="2" isActive={!isSignInActive}><SignUp/></FadeIn>
+                    ?   <FadeIn key="1"><SignInForm/></FadeIn>
+                    :   <FadeIn key="2"><SignUpForm/></FadeIn>
                     }
                 </Center>
             </Main>
@@ -44,8 +44,8 @@ const fadeIn = keyframes`
     to: { opacity: 1; };
 `;
 
-const FadeIn = styled.div<{ isActive: boolean }>`
+const FadeIn = styled.div`
     animation: ${fadeIn} 800ms ease-in-out;
 `;
 
-export default Login;
+export default Welcome;
