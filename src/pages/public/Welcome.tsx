@@ -41,7 +41,7 @@ const Welcome: React.FC<WelcomeProps> = (props) => {
 
 const fadeIn = keyframes`
     from { opacity: 0; };
-    to: { opacity: 1; };
+    to { opacity: 1; };
 `;
 
 const FadeIn = styled.div`

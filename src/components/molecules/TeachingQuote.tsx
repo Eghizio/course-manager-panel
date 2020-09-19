@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { Quote, SuccessResponse } from "../../types/quotes";
+import { Quote } from "../../types/quotes";
+// import { Quote, SuccessResponse } from "../../types/quotes";
 import getQuote from "../../utils/getQuote";
+import Center from "../atoms/Center";
 
 
 const defaultQuote: Quote = {
@@ -15,41 +17,46 @@ const TeachingQuote: React.FC = (props) => {
 
     useEffect(() => {
         const someQuote = getQuote();
-        setQuote(someQuote);
+        const delay = setTimeout(() => {
+            setQuote(someQuote);
+            setLoading(false);
+        }, 1600);
+        
+        return () => { clearTimeout(delay); };
     }, []);
 
-    React.useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-        (async () => {
-            try{
-                const response = await fetch("http://quotes.rest/qod.json?category=students");
-                // const response = await fetch("ugabuga");
+    // useEffect(() => {
+    //     const abortController = new AbortController();
+    //     const signal = abortController.signal;
+    //     (async () => {
+    //         try{
+    //             const response = await fetch("http://quotes.rest/qod.json?category=students");
+    //             // const response = await fetch("ugabuga");
 
-                if(response.status === 200){
-                    const data: SuccessResponse = await response.json();
-                    if(data.contents.quotes.length){
-                        const quoteOfTheDay = data.contents.quotes[0];
-                        const { quote, author } = quoteOfTheDay;
+    //             if(response.status === 200){
+    //                 const data: SuccessResponse = await response.json();
+    //                 if(data.contents.quotes.length){
+    //                     const quoteOfTheDay = data.contents.quotes[0];
+    //                     const { quote, author } = quoteOfTheDay;
                         
-                        if(!signal.aborted) setQuote({ text: quote, author });
-                    }
-                }
-                if(!signal.aborted) setLoading(false);
-            } catch(error) {
-                // console.warn(error, "10 hits per hour api, what a joke XD");
-                if(!signal.aborted) setLoading(false);
-            }
-        })();
+    //                     if(!signal.aborted) setQuote({ text: quote, author });
+    //                 }
+    //             }
+    //             if(!signal.aborted) setLoading(false);
+    //         } catch(error) {
+    //             // console.warn(error, "10 hits per hour api, what a joke XD");
+    //             if(!signal.aborted) setLoading(false);
+    //         }
+    //     })();
 
-        return () => { abortController.abort(); };
-    }, []);
+    //     return () => { abortController.abort(); };
+    // }, []);
     
 
     return (
         <StyledQuote>
             {loading
-            ?   <ShakingText>Loading ...</ShakingText>
+            ?   <ShakingText>Loading</ShakingText>
             :   
                 <FadeIn>
                     <QuoteText>
@@ -61,16 +68,16 @@ const TeachingQuote: React.FC = (props) => {
     );
 };
 
-const StyledQuote = styled.span`
+const StyledQuote = styled(Center)`
     text-align: center;
     max-width: 300px;
 `;
 
 const shake = keyframes`
-    10%, 90% { transform: translate(-1px, 0 ); }
-    20%, 80% { transform: translate(2px, 0); }
-    30%, 50%, 70% { transform: translate(-4px, 0); }
-    40%, 60% { transform: translate(4px, 0); }
+    10%, 90% { transform: translate(-1px, 0 ); };
+    20%, 80% { transform: translate(2px, 0); };
+    30%, 50%, 70% { transform: translate(-4px, 0); };
+    40% 60% { transform: translate(4px, 0); };
 `;
 
 const ShakingText = styled.span`

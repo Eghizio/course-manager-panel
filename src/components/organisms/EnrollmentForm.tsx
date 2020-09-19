@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import Header from "../../components/organisms/Header";
-import Main from "../../components/atoms/Main";
 import { Class } from "../../types/class";
-import ClassCard from "../../components/organisms/ClassCard";
+
 
 const cards: Class[] = [
     {
@@ -80,29 +78,103 @@ const cards: Class[] = [
     },
 ];
 
-export interface BrowseProps{
+const classes = ["1A", "2B", "3C"];
+
+export interface EnrollmentFormProps{
 
 }
 
-const Browse: React.FC<BrowseProps> = (props) => {
+const EnrollmentForm: React.FC<EnrollmentFormProps> = (props) => {
+
+    const handleEnrollment = useCallback(async (event) => {
+        event.preventDefault();
+        console.log(event.target.elements);
+        const { firstName, lastName, email, studentsClass, extraClass } = event.target.elements;
+
+        console.log({ firstName, lastName, email, studentsClass, extraClass });
+        [firstName, lastName, email, studentsClass].forEach(input => console.log(input.value))
+        extraClass.forEach((checkbox: any) => console.log(checkbox.checked));
+
+        console.log("firebase add student");
+    }, []);
+
     return (
         <div>
-            <Header>Browse</Header>
-            <Main>
-                <ClassList>
-                    {cards.map(card => <ClassCard key={card.id} {...card}/>)}
-                </ClassList>
-            </Main>
+            <h3>Enroll now ugabuga</h3>
+            <Form onSubmit={handleEnrollment}>
+                <Rows>
+                    <Label>
+                        Imię
+                        <input type="text" name="firstName" placeholder="Imię"/>
+                    </Label>
+                    <Label>
+                        Nazwisko
+                        <input type="text" name="lastName" placeholder="Nazwisko"/>
+                    </Label>
+                    <Label>
+                        Email
+                        <input type="email" name="email" placeholder="Email"/>
+                    </Label>
+                    <Label>
+                        Klasa
+                        <select name="studentsClass">
+                            <option value=""></option>
+                            {classes.map(studentsClass =>
+                                <option key={studentsClass} value={studentsClass}>
+                                    {studentsClass}
+                                </option>
+                            )}
+                        </select>
+                    </Label>
+                    <Label>
+                        Zajęcia
+                        <ClassList>
+                            {cards.map(({id, title}) => 
+                                <ClassListItem key={id}>
+                                    <input type="checkbox" name="extraClass"/>
+                                    {title}
+                                </ClassListItem>
+                            )}
+                        </ClassList>
+                    </Label>
+                </Rows>
+                <SubmitButton>
+                    Enroll byczq
+                </SubmitButton>
+            </Form>
         </div>
     );
 };
 
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
+
+const Rows = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`;
+
+const Label = styled.label`
+    display: flex;
+    flex-direction: column;
+`;
+
 const ClassList = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 50px;
-    overflow: auto;
+    gap: 5px;
 `;
 
-export default Browse;
+const ClassListItem = styled.div`
+
+`;
+
+const SubmitButton = styled.button`
+
+`;
+
+export default EnrollmentForm;

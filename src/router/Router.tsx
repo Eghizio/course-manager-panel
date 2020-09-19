@@ -10,6 +10,7 @@ const Router: React.FC = (props) => {
             <Switch>
                 <Route exact path="/" component={Page.Public.Home}/>
                 <Route exact path="/browse" component={Page.Public.Browse}/>
+                <Route exact path="/enroll" component={Page.Public.Enroll}/>
                 <Route exact path="/login" component={Page.Public.Welcome}/>
                 <PrivateRoute exact path="/panel" component={Page.Private.Panel}/>
                 <Route component={Page.Public.NotFound}/>

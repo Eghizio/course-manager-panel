@@ -13,9 +13,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
     const navigationItems = [
         { name: "Zajęcia", path: "/browse" },
-        { name: "Zapisz się", path: "/signup" },
+        { name: "Zapisz się", path: "/enroll" },
         { name: "Dla nauczycieli", path: "/panel" },
-        { name: "iksde logowanie", path: "/login" },
     ];
 
     return (
@@ -44,6 +43,7 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     background-color: dodgerblue;
     color: white;
+    width: 100%;
     height: 80px;
     box-shadow: 0px 0px 7px dodgerblue;
 `;
