@@ -13,7 +13,6 @@ export interface EnrollProps{
 
 const Enroll: React.FC<EnrollProps> = (props) => {
     const [enrolledStudent, setEnrolledStudent] = useState<null | EnrollData>(null); // will probably be elevated to context
-    console.log(enrolledStudent)
 
     return (
         <div>

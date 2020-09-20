@@ -6,12 +6,13 @@ import Divider from "../atoms/Divider";
 
 
 const CourseCard: React.FC<Course> = ({ id, title, categories, description, teachers }) => {
+    // TODO: fix repeating keys
     return (
         <StyledCard>
             <Heading>
                 <Title>{title}</Title>
                 <Categories>
-                    {categories.map(category => <Pill key={category}>{category}</Pill>)}
+                    {categories.map((category, i) => <Pill key={category+i}>{category}</Pill>)}
                 </Categories>
                 <Divider></Divider>
             </Heading>
@@ -21,7 +22,7 @@ const CourseCard: React.FC<Course> = ({ id, title, categories, description, teac
                 </Description>
             </Content>
             <Teachers>
-                Prowadzący: {teachers.map(teacher => <ElegantText key={teacher}>{teacher}</ElegantText>)}
+                Prowadzący: {teachers.map((teacher, i) => <ElegantText key={teacher+i}>{teacher}</ElegantText>)}
             </Teachers>
         </StyledCard>
     );
