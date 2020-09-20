@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import { Class } from "../../types/class";
+import { Course, Student, EnrollData } from "../../types/student";
+import CheckboxList, { ListItem } from "../molecules/CheckboxList";
 
 
-const cards: Class[] = [
+const courses: Course[] = [
     {
         id: '_' + Math.random().toString(36).substr(2, 9),
         title: "Some class title",
@@ -81,22 +82,33 @@ const cards: Class[] = [
 const classes = ["1A", "2B", "3C"];
 
 export interface EnrollmentFormProps{
-
+    enrollStudent: React.Dispatch<React.SetStateAction<null | EnrollData>>;
 }
 
-const EnrollmentForm: React.FC<EnrollmentFormProps> = (props) => {
+const EnrollmentForm: React.FC<EnrollmentFormProps> = ({ enrollStudent }) => {
+    const [checkedCourses, setCheckedCourses] = useState<ListItem[]>([]);
 
     const handleEnrollment = useCallback(async (event) => {
         event.preventDefault();
-        console.log(event.target.elements);
-        const { firstName, lastName, email, studentsClass, extraClass } = event.target.elements;
+        const { firstName, lastName, email, studentClass } = event.target.elements;
 
-        console.log({ firstName, lastName, email, studentsClass, extraClass });
-        [firstName, lastName, email, studentsClass].forEach(input => console.log(input.value))
-        extraClass.forEach((checkbox: any) => console.log(checkbox.checked));
+        const formData: EnrollData = {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            email: email.value,
+            studentClass: studentClass.value,
+            courses: checkedCourses
+        };
 
-        console.log("firebase add student");
-    }, []);
+        // temp validation
+        if(Object.values(formData).some(val => val.length === 0)){
+            console.log("chotto mate");
+            return;
+        }
+
+        console.log("firestore add student: ", formData);
+        if(formData !== null )enrollStudent(formData);
+    }, [checkedCourses]);
 
     return (
         <div>
@@ -117,25 +129,21 @@ const EnrollmentForm: React.FC<EnrollmentFormProps> = (props) => {
                     </Label>
                     <Label>
                         Klasa
-                        <select name="studentsClass">
-                            <option value=""></option>
-                            {classes.map(studentsClass =>
-                                <option key={studentsClass} value={studentsClass}>
-                                    {studentsClass}
+                        <select name="studentClass">
+                            <option value="">Wybierz klasę</option>
+                            {classes.map(studentClass =>
+                                <option key={studentClass} value={studentClass}>
+                                    {studentClass}
                                 </option>
                             )}
                         </select>
                     </Label>
                     <Label>
                         Zajęcia
-                        <ClassList>
-                            {cards.map(({id, title}) => 
-                                <ClassListItem key={id}>
-                                    <input type="checkbox" name="extraClass"/>
-                                    {title}
-                                </ClassListItem>
-                            )}
-                        </ClassList>
+                        <CheckboxList
+                            items={courses}
+                            setChecked={setCheckedCourses}
+                        />
                     </Label>
                 </Rows>
                 <SubmitButton>
@@ -161,16 +169,6 @@ const Rows = styled.div`
 const Label = styled.label`
     display: flex;
     flex-direction: column;
-`;
-
-const ClassList = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-`;
-
-const ClassListItem = styled.div`
-
 `;
 
 const SubmitButton = styled.button`

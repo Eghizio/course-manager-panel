@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Class } from "../../types/class";
+import { Course } from "../../types/student";
 import Pill from "../atoms/Pill";
 import Divider from "../atoms/Divider";
 
 
-const ClassCard: React.FC<Class> = ({ id, title, categories, description, teachers }) => {
+const CourseCard: React.FC<Course> = ({ id, title, categories, description, teachers }) => {
     return (
         <StyledCard>
             <Heading>
@@ -74,4 +74,4 @@ const ElegantText = styled.span`
     font-weight: bold;
 `;
 
-export default ClassCard;
+export default CourseCard;

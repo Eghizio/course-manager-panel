@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../../components/organisms/Header";
 import Main from "../../components/atoms/Main";
-import { Class } from "../../types/class";
-import ClassCard from "../../components/organisms/ClassCard";
+import { Course } from "../../types/student";
+import CourseCard from "../../components/organisms/CourseCard";
 
-const cards: Class[] = [
+const courses: Course[] = [
     {
         id: '_' + Math.random().toString(36).substr(2, 9),
         title: "Some class title",
@@ -89,15 +89,15 @@ const Browse: React.FC<BrowseProps> = (props) => {
         <div>
             <Header>Browse</Header>
             <Main>
-                <ClassList>
-                    {cards.map(card => <ClassCard key={card.id} {...card}/>)}
-                </ClassList>
+                <CourseList>
+                    {courses.map(course => <CourseCard key={course.id} {...course}/>)}
+                </CourseList>
             </Main>
         </div>
     );
 };
 
-const ClassList = styled.div`
+const CourseList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
