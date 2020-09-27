@@ -1,16 +1,21 @@
 import React from "react";
 // import styled from "styled-components";
-import Header from "../../components/organisms/Header";
+import Page from "../../components/atoms/Page";
 import Main from "../../components/atoms/Main";
+import Header from "../../components/organisms/Header";
 
 export interface HomeProps{
 
 }
 
+// 700px width breaks screen so should go mobile then
+// rearrange sidedrawer and hamburger into header component, combine with navigation(drawer child) and responsive
 const Home: React.FC<HomeProps> = (props) => {
     return (
-        <div>
-            <Header>Home</Header>
+        <Page>
+            <Header>
+                Home
+            </Header>
             <Main>
                 <h2>Home</h2>
                 <p>
@@ -20,7 +25,7 @@ const Home: React.FC<HomeProps> = (props) => {
                 </p>
                 <p> jakieś tam inne bajerki żeby ładnie wyglądało i żeby dobrze nawigować usera po stronie </p>
             </Main>
-        </div>
+        </Page>
     );
 };
 

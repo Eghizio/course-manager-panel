@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { withRouter, RouteComponentProps } from "react-router";
+import { useHistory } from "react-router";
 import { auth } from "../../firebase";
 
 export type NavigationItem = { name: string, path: string };
-export interface NavigationProps extends RouteComponentProps{
+export interface HorizontalNavigationProps{
     navItems: NavigationItem[]
     isLoggedIn: boolean
-    history: any
 }
 
-const Navigation: React.FC<NavigationProps> = ({ navItems, isLoggedIn, history }) => {
+const HorizontalNavigation: React.FC<HorizontalNavigationProps> = ({ navItems, isLoggedIn }) => {
+    const history = useHistory();
+
     return (
         <StyledNavigation>
             <NavigationList>
@@ -65,6 +66,7 @@ const NavigationListItem = styled.li`
 `;
 
 const Button = styled.button`
+    cursor: pointer;
     border: none;
     align-self: center;
     margin-left: 20px;
@@ -93,4 +95,4 @@ const SignOutButton = styled(Button)`
     }
 `;
 
-export default withRouter(Navigation);
+export default HorizontalNavigation;

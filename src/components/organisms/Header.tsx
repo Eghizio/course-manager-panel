@@ -1,8 +1,14 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../../providers/AuthProvider";
 import Breadcrumb from "../atoms/Breadcrumb";
-import Navigation from "../molecules/Navigation";
+import HorizontalNavigation from "../molecules/HorizontalNavigation";
+import VerticalNavigation from "../molecules/VerticalNavigation";
+
+import SideDrawer from "../../components/organisms/SideDrawer";
+import Hamburger from "../../components/atoms/Hamburger";
+import useWindowSize from "../../hooks/useWindowSize";
+
 
 export interface HeaderProps{
 
@@ -10,6 +16,11 @@ export interface HeaderProps{
 
 const Header: React.FC<HeaderProps> = ({ children }) => {
     const { currentUser } = useContext(AuthContext);
+
+    const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
+    const { width } = useWindowSize();
+    const isMobile = width < 700;
+
 
     const navigationItems = [
         { name: "Zajęcia", path: "/browse" },
@@ -32,7 +43,25 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                     </Breadcrumb>
                 </BreadcrumbsBar>
             </Heading>
-            <Navigation navItems={navigationItems} isLoggedIn={!!currentUser}/>
+            {isMobile
+            ?
+                <React.Fragment>
+                    <SideDrawer
+                        side="left"
+                        isOpen={isDrawerOpened}
+                        closeDrawer={() => setIsDrawerOpened(false)}
+                    >
+                        <VerticalNavigation navItems={navigationItems} isLoggedIn={!!currentUser}/>
+                        {/* <ul>
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ul> */}
+                    </SideDrawer>
+                    <Hamburger onClick={() => setIsDrawerOpened(true)}/>
+                </React.Fragment>
+            :   <HorizontalNavigation navItems={navigationItems} isLoggedIn={!!currentUser}/>
+            }
         </StyledHeader>
     );
 };
