@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import Header from "../../components/organisms/Header";
+import Page from "../../components/atoms/Page";
 import Main from "../../components/atoms/Main";
 import Center from "../../components/atoms/Center";
 import ToggleText from "../../components/molecules/ToggleText";
+import Header from "../../components/organisms/Header";
 import SignInForm from "../../components/organisms/SignInForm";
 import SignUpForm from "../../components/organisms/SignUpForm";
 
@@ -19,7 +20,7 @@ const Welcome: React.FC<WelcomeProps> = (props) => {
     // make signin signout fadein
 
     return (
-        <div>
+        <Page>
             <Header>Welcome</Header>
             <Main>
                 <Center>
@@ -35,7 +36,7 @@ const Welcome: React.FC<WelcomeProps> = (props) => {
                     }
                 </Center>
             </Main>
-        </div>
+        </Page>
     );
 };
 
