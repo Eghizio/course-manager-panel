@@ -327,7 +327,7 @@ export const courses: Course[] = [
     "categories": [
       "Grocery",
       "Games",
-      "Grocery"
+      "Music"
     ],
     "capacity": 15,
     "date": {
@@ -741,7 +741,7 @@ export const courses: Course[] = [
     "categories": [
       "Books",
       "Movies",
-      "Movies"
+      "Music"
     ],
     "capacity": 20,
     "date": {

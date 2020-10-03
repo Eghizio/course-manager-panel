@@ -3,9 +3,8 @@ import styled from "styled-components";
 import Page from "../../components/atoms/Page";
 import Main from "../../components/atoms/Main";
 import Header from "../../components/organisms/Header";
-import CourseCard from "../../components/molecules/CourseCard";
-import { DummyDataContext } from "../../providers/DummyDataProvider";
 import Card from "../../components/molecules/Card";
+import { DummyDataContext } from "../../providers/DummyDataProvider";
 
 
 export interface BrowseProps{
@@ -21,7 +20,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
             <Main>
                 <CourseList>
                     {courses.map(course => <Card key={course.id} {...course}/>)}
-                    {courses.map(course => <CourseCard key={course.id} {...course}/>)}
                 </CourseList>
             </Main>
         </Page>
@@ -29,11 +27,10 @@ const Browse: React.FC<BrowseProps> = (props) => {
 };
 
 const CourseList = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 15px;
-    margin: 5px;
+    padding: 15px 0;
     overflow: auto;
 `;
 
